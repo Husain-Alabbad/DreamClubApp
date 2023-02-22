@@ -1,0 +1,73 @@
+<main id="main">
+
+  <!-- ======= Breadcrumbs ======= -->
+  <section id="breadcrumbs" class="breadcrumbs">
+    <div class="breadcrumb-hero">
+      <div class="container">
+        <div class="breadcrumb-hero">
+          <h2>Dream Club</h2>
+          <p>Dream Clubs by the users </p>
+        </div>
+      </div>
+    </div>
+    <div class="container" id="addContainer">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li>Dream Club</li>
+      </ol>
+      <%if(currentUser) { %>
+    <div id="addNavbar" class="navbar">
+      <ul>
+        <li><a class="getstarted" href="/dreamClub/add">Add Dream Club</a></li>
+      </ul>
+    </div>
+    <% } %>
+  </div>
+  </section><!-- End Breadcrumbs -->
+
+  <!-- ======= Pricing Section ======= -->
+  <section id="dreamClub" class="pricing">
+    <div class="container">
+     
+      <div class="row">
+        <% dreamClubs.forEach(function(dreamClub) { %>
+
+        <div class="col-lg-3 col-md-6">
+         
+          <div class="box" data-aos="fade-up">
+            <h3 id="h3"><a href="/dreamClub/detail?id=<%= dreamClub._id %>"><%= dreamClub.club.name %></a></h3>
+            <h4><sup></sup><span> </span></h4>
+            <ul>
+              <li id="li"><img id="indexImageSize" src="../img/<%= dreamClub.dreamClubImage %>"/> </li>
+              <li id="li"> <%= dreamClub.player.name %></li>
+              <li id="li"> <%= dreamClub.kitNumber %></li>
+              <li id="li"> <%= dreamClub.playerPosition %></li>
+              <li id="li"><a href="<%= dreamClub.playerVideo %>"target="_blank">Player Video Link</a></li>
+              <li id="li"> <%= dreamClub.comment %></li>
+            </ul>
+            
+            <div class="btn-wrap">
+              <%if(currentUser!=null){%>
+                    
+                <%if(currentUser.role == "admin" || currentUser._id == dreamClub.user._id.toString()) { %>
+              <a href="/dreamClub/edit?id=<%= dreamClub._id %>" class="btn-buy">Edit</a>
+              <% }%>
+              <%if(currentUser.role == "admin") { %>
+              <a href="/dreamClub/delete?id=<%= dreamClub._id %>" class="btn-buy">Delete</a>
+              <% }%>
+              <% }%>
+            </div>
+          </div>
+        </div>
+
+
+        <% }) %>
+      </div>
+     
+    </div>
+   
+  </section><!-- End Pricing Section -->
+
+ 
+</main><!-- End #main -->
+
